@@ -487,6 +487,20 @@ body.page-exit{
     -webkit-font-smoothing:antialiased;
   }
 }
+/* ===== ĐÓNG RÈM KHI QUAY LẠI (CHỈ THÊM) ===== */
+#curtain.close .left{
+  transform:translateX(0);
+  opacity:1;
+}
+
+#curtain.close .right{
+  transform:translateX(0);
+  opacity:1;
+}
+
+#curtain.close{
+  pointer-events:auto;
+}
 
 </style>
 </head>
@@ -874,9 +888,30 @@ document.addEventListener("DOMContentLoaded",()=>{
 if(window.innerWidth >= 1024){
   document.body.style.willChange = "transform";
 }
+/* ===== ĐÓNG RÈM RỒI QUAY LẠI TRANG TRƯỚC ===== */
+document.addEventListener("DOMContentLoaded",()=>{
+  const backBtn = document.getElementById("backToLetter");
+  const curtain = document.getElementById("curtain");
+
+  if(!backBtn || !curtain) return;
+
+  backBtn.addEventListener("click",()=>{
+    // gỡ trạng thái mở nếu có
+    curtain.classList.remove("open");
+
+    // thêm trạng thái đóng
+    curtain.classList.add("close");
+
+    // đợi rèm đóng xong rồi quay lại
+    setTimeout(()=>{
+      window.location.href = "thu.html";
+    },1400); // khớp thời gian animation rèm
+  });
+});
 
 </script>
 
 </body>
 </html>
+
 
